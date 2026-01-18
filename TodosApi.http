@@ -1,0 +1,88 @@
+@baseUrl = http://localhost:5252
+@contentType = application/json
+
+## Authentication Endpoints
+
+### Register a new user
+# @name register
+POST {{baseUrl}}/api/auth/register
+Content-Type: {{contentType}}
+
+{
+	"username": "admin",
+	"password": "admin123"
+}
+
+###
+
+### Login and get JWT token
+# @name login
+POST {{baseUrl}}/api/auth/login
+Content-Type: {{contentType}}
+
+{
+	"username": "admin",
+	"password": "admin123"
+}
+
+###
+
+@token = {{login.response.body.$.token}}
+
+## Task Management Endpoints (Protected by JWT)
+
+### Get all tasks for authenticated user
+GET {{baseUrl}}/api/tasks
+Authorization: Bearer {{token}}
+Accept: {{contentType}}
+
+###
+
+### Get a specific task
+GET {{baseUrl}}/api/tasks/1
+Authorization: Bearer {{token}}
+Accept: {{contentType}}
+
+###
+
+### Create a new task
+# @name createTask
+POST {{baseUrl}}/api/tasks
+Authorization: Bearer {{token}}
+Content-Type: {{contentType}}
+
+{
+	"title": "Buy groceries",
+	"description": "Milk, eggs, bread"
+}
+
+###
+
+### Update a task
+PUT {{baseUrl}}/api/tasks/1
+Authorization: Bearer {{token}}
+Content-Type: {{contentType}}
+
+{
+	"title": "Buy groceries (URGENT)",
+	"description": "Milk, eggs, bread, cheese",
+	"isCompleted": false
+}
+
+###
+
+### Mark task as completed
+PATCH {{baseUrl}}/api/tasks/1/complete?value=true
+Authorization: Bearer {{token}}
+
+###
+
+### Mark task as incomplete
+PATCH {{baseUrl}}/api/tasks/1/complete?value=false
+Authorization: Bearer {{token}}
+
+###
+
+### Delete a task
+DELETE {{baseUrl}}/api/tasks/1
+Authorization: Bearer {{token}}
