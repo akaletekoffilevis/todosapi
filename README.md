@@ -4,14 +4,14 @@ Une API REST robuste et sécurisée pour la gestion d'une liste de tâches (Todo
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![.NET](https://img.shields.io/badge/.NET-9.0-512BD4?style=flat-square&logo=dotnet)](https://dotnet.microsoft.com)
 
-Une API REST robuste et sécurisée pour la gestion d'une liste de tâches (Todo List) développée avec **ASP.NET Core 9** et **Entity Framework Core**.
-
 ## 📚 Documentation
 
 - 🚀 **[Démarrage Rapide](Docs/QUICKSTART.md)** - Installation et premiers pas
 - 📖 **[Documentation API](Docs/API_DOCUMENTATION.md)** - Endpoints détaillés avec exemples
 - 🧪 **[Guide de Test](Docs/TESTING_GUIDE.md)** - Tests avec VS Code REST Client
 - 📦 **[Guide Production](Docs/PRODUCTION_GUIDE.md)** - Déploiement et configuration
+- 📚 **[Index Complet](Docs/INDEX.md)** - Navigation de toute la documentation
+- 🗄️ **[Migration SQLite → SQL Server](Docs/MIGRATE_TO_SQLSERVER.md)** - Guide migration base de données
 
 ## 🎯 Fonctionnalités Principales
 

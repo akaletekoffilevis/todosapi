@@ -19,10 +19,11 @@
 │   ├── TESTING_GUIDE.md (Tests détaillés)
 │   ├── PRODUCTION_GUIDE.md (Déploiement)
 │   ├── DOCUMENTATION_SETUP.md (Setup checklist)
-│   ├── GITHUB_READY.md (Structure finale)
 │   ├── CORRECTIONS_APPLIQUEES.md (Corrections)
 │   ├── QUICK_TEST.md (Tests rapides)
-│   └── FUTURE_IMPROVEMENTS.md (Roadmap)
+│   ├── MIGRATE_TO_SQLSERVER.md (Migration BD)
+│   ├── FUTURE_IMPROVEMENTS.md (Roadmap)
+│   └── ORGANISATION_FINALE.md (Documentation)
 │
 ├── 🤝 CONTRIBUTING.md (Guide contribution)
 ├── 📋 CHANGELOG.md (Historique v1.0.0)
@@ -93,7 +94,6 @@ git push -u origin main
 - ✅ LICENSE MIT
 - ✅ .gitignore
 - ✅ Docs/DOCUMENTATION_SETUP.md
-- ✅ Docs/GITHUB_READY.md
 - ✅ Docs/CORRECTIONS_APPLIQUEES.md
 - ✅ Docs/QUICK_TEST.md
 - ✅ Docs/FUTURE_IMPROVEMENTS.md

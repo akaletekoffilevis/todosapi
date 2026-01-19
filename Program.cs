@@ -134,13 +134,20 @@ try
     using (var scope = app.Services.CreateScope())
     {
         var db = scope.ServiceProvider.GetRequiredService<TodoDbContext>();
-        Directory.CreateDirectory(Path.Combine(AppContext.BaseDirectory, "Data"));
-        db.Database.EnsureCreated();
+        // Create Data directory for SQLite database
+        if (!app.Environment.IsProduction())
+        {
+            Directory.CreateDirectory(Path.Combine(AppContext.BaseDirectory, "Data"));
+        }
+        // Apply pending migrations
+        db.Database.Migrate();
+        Console.WriteLine("✅ Database migrated successfully");
     }
 }
 catch (Exception ex)
 {
-    Console.WriteLine($"Error creating database: {ex.Message}");
+    Console.WriteLine($"❌ Error migrating database: {ex.Message}");
+    throw; // En production, le démarrage échoue si la migration échoue
 }
 
 // Configure middleware pipeline

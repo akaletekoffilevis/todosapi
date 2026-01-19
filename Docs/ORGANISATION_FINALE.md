@@ -18,10 +18,11 @@
 │   ├── TESTING_GUIDE.md (Tests détaillés)
 │   ├── PRODUCTION_GUIDE.md (Déploiement)
 │   ├── DOCUMENTATION_SETUP.md (Setup checklist)
-│   ├── GITHUB_READY.md (Structure finale)
 │   ├── CORRECTIONS_APPLIQUEES.md (Corrections appliquées)
 │   ├── QUICK_TEST.md (Tests rapides)
-│   └── FUTURE_IMPROVEMENTS.md (Roadmap)
+│   ├── MIGRATE_TO_SQLSERVER.md (Migration BD)
+│   ├── FUTURE_IMPROVEMENTS.md (Roadmap)
+│   └── ORGANISATION_FINALE.md (Ce document)
 │
 ├── 🧪 TodosApi.http (Tests HTTP - VS Code)
 ├── 🧪 API_TEST_GUIDE.http (Guide tests)
@@ -56,8 +57,9 @@
 - **QUICK_TEST.md**: Tests rapides (2 min)
 - **CORRECTIONS_APPLIQUEES.md**: Changements effectués
 - **DOCUMENTATION_SETUP.md**: Setup checklist
-- **GITHUB_READY.md**: Structure finale pour GitHub
+- **MIGRATE_TO_SQLSERVER.md**: Migration SQLite → SQL Server
 - **FUTURE_IMPROVEMENTS.md**: Roadmap et améliorations
+- **ORGANISATION_FINALE.md**: Ce document
 
 ---
 

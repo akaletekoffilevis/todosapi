@@ -39,9 +39,9 @@
 ### Documentation de Référence
 
 - **[📋 DOCUMENTATION_SETUP.md](DOCUMENTATION_SETUP.md)** - Setup checklist complète
-- **[🎯 GITHUB_READY.md](GITHUB_READY.md)** - Structure finale prête pour GitHub
 - **[✅ CORRECTIONS_APPLIQUEES.md](CORRECTIONS_APPLIQUEES.md)** - Corrections et harmonisations
-- **[🚀 FUTURE_IMPROVEMENTS.md](FUTURE_IMPROVEMENTS.md)** - Roadmap et améliorations planifiées
+- **[�️ MIGRATE_TO_SQLSERVER.md](MIGRATE_TO_SQLSERVER.md)** - Migration SQLite vers SQL Server
+- **[�🚀 FUTURE_IMPROVEMENTS.md](FUTURE_IMPROVEMENTS.md)** - Roadmap et améliorations planifiées
 - **[📄 ORGANISATION_FINALE.md](ORGANISATION_FINALE.md)** - Organisation de la documentation
 
 ---
@@ -95,10 +95,9 @@ TodosApi/
 │   ├── QUICK_TEST.md
 │   ├── CORRECTIONS_APPLIQUEES.md
 │   ├── DOCUMENTATION_SETUP.md
+│   ├── MIGRATE_TO_SQLSERVER.md
 │   ├── FUTURE_IMPROVEMENTS.md
 │   └── ORGANISATION_FINALE.md
-│   ├── TESTING_GUIDE.md
-│   └── INDEX.md (ce fichier)
 ├── Properties/            # Configuration
 │   └── launchSettings.json
 ├── README.md              # Vue d'ensemble

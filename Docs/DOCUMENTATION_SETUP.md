@@ -20,10 +20,11 @@ La documentation du projet TodosApi est maintenant **prête pour GitHub** !
 - ✅ **TESTING_GUIDE.md** - Guide de test complet
 - ✅ **PRODUCTION_GUIDE.md** - Déploiement en production
 - ✅ **DOCUMENTATION_SETUP.md** - Setup checklist
-- ✅ **GITHUB_READY.md** - Structure finale prête pour GitHub
 - ✅ **CORRECTIONS_APPLIQUEES.md** - Corrections appliquées
 - ✅ **QUICK_TEST.md** - Instructions de test rapide
+- ✅ **MIGRATE_TO_SQLSERVER.md** - Migration SQLite vers SQL Server
 - ✅ **FUTURE_IMPROVEMENTS.md** - Améliorations planifiées
+- ✅ **ORGANISATION_FINALE.md** - Organisation de la documentation
 
 ---
 
