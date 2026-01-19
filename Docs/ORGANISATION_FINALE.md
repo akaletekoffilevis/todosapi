@@ -3,7 +3,7 @@
 ## ✅ Structure Finale
 
 ```
-📦 TodosApi/
+📦 todosapi/
 │
 ├── 📄 README.md ⭐ (Principal - avec badges & index)
 ├── 🤝 CONTRIBUTING.md (Guide contribution)

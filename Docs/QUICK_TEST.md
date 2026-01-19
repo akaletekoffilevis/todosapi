@@ -4,7 +4,7 @@
 
 ### ✅ Étape 1: Démarrer l'API
 ```bash
-cd TodosApi
+cd todosapi
 dotnet run
 ```
 

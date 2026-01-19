@@ -36,10 +36,10 @@ Pour proposer une nouvelle fonctionnalité:
 ### Installation locale
 
 ```bash
-git clone https://github.com/yourusername/TodosApi.git
+git clone https://github.com/yourusername/todosapi.git
 cd TodosApi
 dotnet restore
-dotnet run --project TodosApi.csproj
+dotnet run --project todosapi.csproj
 ```
 
 ### Structure du Projet

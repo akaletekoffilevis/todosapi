@@ -66,7 +66,7 @@ Une API REST robuste et sécurisée pour la gestion d'une liste de tâches (Todo
 1. **Cloner ou extraire le projet**
 
    ```bash
-   cd TodosApi
+   cd todosapi
    ```
 
 2. **Restaurer les dépendances**
@@ -262,7 +262,7 @@ Salt stocké en base de données
 ## 📁 Structure du Projet
 
 ```
-TodosApi/
+todosapi/
 ├── Controllers/
 │   ├── TodoAuthController.cs      # Endpoints auth
 │   └── TodoController.cs          # Endpoints tâches

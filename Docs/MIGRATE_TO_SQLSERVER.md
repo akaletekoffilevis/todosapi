@@ -1,6 +1,6 @@
 # Migration de SQLite vers SQL Server
 
-Ce guide explique comment migrer votre TodosApi de **SQLite (local)** vers **SQL Server (serveur)**.
+Ce guide explique comment migrer votre todosapi de **SQLite (local)** vers **SQL Server (serveur)**.
 
 ---
 

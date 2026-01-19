@@ -3,7 +3,7 @@
 ### 🎯 Fichiers Créés/Organisés
 
 ```
-📦 TodosApi/
+📦 todosapi/
 │
 ├── 📄 README.md ⭐ (Principal - avec badges & index)
 │   ├── 🎯 Fonctionnalités
@@ -73,7 +73,7 @@ git add .
 git commit -m "docs: Documentation GitHub complète - v1.0.0"
 
 # Ajouter remote
-git remote add origin https://github.com/yourusername/TodosApi.git
+git remote add origin https://github.com/yourusername/todosapi.git
 
 # Push
 git branch -M main

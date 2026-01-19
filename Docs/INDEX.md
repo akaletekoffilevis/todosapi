@@ -73,7 +73,7 @@
 ## 🏗️ Structure du Projet
 
 ```
-TodosApi/
+todosapi/
 ├── Controllers/           # Endpoints API
 │   ├── TodoAuthController.cs
 │   ├── TodoController.cs
