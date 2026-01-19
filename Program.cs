@@ -129,19 +129,19 @@ builder.Services.AddAuthorization();
 var app = builder.Build();
 
 // Create database and apply migrations
-// try
-// {
-//     using (var scope = app.Services.CreateScope())
-//     {
-//         var db = scope.ServiceProvider.GetRequiredService<TodoDbContext>();
-//         Directory.CreateDirectory(Path.Combine(AppContext.BaseDirectory, "Data"));
-//         db.Database.EnsureCreated();
-//     }
-// }
-// catch (Exception ex)
-// {
-//     Console.WriteLine($"Error creating database: {ex.Message}");
-// }
+try
+{
+    using (var scope = app.Services.CreateScope())
+    {
+        var db = scope.ServiceProvider.GetRequiredService<TodoDbContext>();
+        Directory.CreateDirectory(Path.Combine(AppContext.BaseDirectory, "Data"));
+        db.Database.EnsureCreated();
+    }
+}
+catch (Exception ex)
+{
+    Console.WriteLine($"Error creating database: {ex.Message}");
+}
 
 // Configure middleware pipeline
 if (app.Environment.IsDevelopment())

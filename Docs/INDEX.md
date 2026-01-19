@@ -95,7 +95,6 @@ TodosApi/
 │   ├── QUICK_TEST.md
 │   ├── CORRECTIONS_APPLIQUEES.md
 │   ├── DOCUMENTATION_SETUP.md
-│   ├── GITHUB_READY.md
 │   ├── FUTURE_IMPROVEMENTS.md
 │   └── ORGANISATION_FINALE.md
 │   ├── TESTING_GUIDE.md
