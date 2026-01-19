@@ -1,6 +1,17 @@
 # Todos API - Gestion Sécurisée des Tâches
 
 Une API REST robuste et sécurisée pour la gestion d'une liste de tâches (Todo List) développée avec **ASP.NET Core 9** et **Entity Framework Core**.
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![.NET](https://img.shields.io/badge/.NET-9.0-512BD4?style=flat-square&logo=dotnet)](https://dotnet.microsoft.com)
+
+Une API REST robuste et sécurisée pour la gestion d'une liste de tâches (Todo List) développée avec **ASP.NET Core 9** et **Entity Framework Core**.
+
+## 📚 Documentation
+
+- 🚀 **[Démarrage Rapide](Docs/QUICKSTART.md)** - Installation et premiers pas
+- 📖 **[Documentation API](Docs/API_DOCUMENTATION.md)** - Endpoints détaillés avec exemples
+- 🧪 **[Guide de Test](Docs/TESTING_GUIDE.md)** - Tests avec VS Code REST Client
+- 📦 **[Guide Production](Docs/PRODUCTION_GUIDE.md)** - Déploiement et configuration
 
 ## 🎯 Fonctionnalités Principales
 
@@ -77,8 +88,8 @@ Une API REST robuste et sécurisée pour la gestion d'une liste de tâches (Todo
    ```
 
 5. **Accéder à l'API**
-   - **Swagger UI** : <http://localhost:5000/swagger>
-   - **Base API** : <http://localhost:5000>
+   - **Swagger UI** : <http://localhost:5252/swagger>
+   - **Base API** : <http://localhost:5252>
 
 ---
 
@@ -87,11 +98,11 @@ Une API REST robuste et sécurisée pour la gestion d'une liste de tâches (Todo
 ### 1️⃣ S'inscrire
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST http://localhost:5252/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "admin",
-    "password": "admin123"
+    "username": "testuser",
+    "password": "Test@1234"
   }'
 ```
 
@@ -100,7 +111,7 @@ curl -X POST http://localhost:5000/api/auth/register \
 ```json
 {
   "id": 1,
-  "username": "admin",
+  "username": "testuser",
   "message": "User registered successfully"
 }
 ```
@@ -108,11 +119,11 @@ curl -X POST http://localhost:5000/api/auth/register \
 ### 2️⃣ Se Connecter
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/login \
+curl -X POST http://localhost:5252/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
-    "username": "admin",
-    "password": "admin123"
+    "username": "testuser",
+    "password": "Test@1234"
   }'
 ```
 
@@ -123,7 +134,7 @@ curl -X POST http://localhost:5000/api/auth/login \
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
   "user": {
     "id": 1,
-    "username": "admin"
+    "username": "testuser"
   },
   "message": "Login successful"
 }
@@ -135,7 +146,7 @@ curl -X POST http://localhost:5000/api/auth/login \
 
 ```bash
 TOKEN="votre_token_jwt"
-curl -X POST http://localhost:5000/api/tasks \
+curl -X POST http://localhost:5252/api/tasks \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{
@@ -147,14 +158,14 @@ curl -X POST http://localhost:5000/api/tasks \
 ### 4️⃣ Récupérer les Tâches
 
 ```bash
-curl -X GET http://localhost:5000/api/tasks \
+curl -X GET http://localhost:5252/api/tasks \
   -H "Authorization: Bearer $TOKEN"
 ```
 
 ### 5️⃣ Modifier une Tâche
 
 ```bash
-curl -X PUT http://localhost:5000/api/tasks/1 \
+curl -X PUT http://localhost:5252/api/tasks/1 \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{
@@ -167,14 +178,14 @@ curl -X PUT http://localhost:5000/api/tasks/1 \
 ### 6️⃣ Marquer comme Complétée
 
 ```bash
-curl -X PATCH "http://localhost:5000/api/tasks/1/complete?value=true" \
+curl -X PATCH "http://localhost:5252/api/tasks/1/complete?value=true" \
   -H "Authorization: Bearer $TOKEN"
 ```
 
 ### 7️⃣ Supprimer une Tâche
 
 ```bash
-curl -X DELETE http://localhost:5000/api/tasks/1 \
+curl -X DELETE http://localhost:5252/api/tasks/1 \
   -H "Authorization: Bearer $TOKEN"
 ```
 
@@ -184,11 +195,11 @@ curl -X DELETE http://localhost:5000/api/tasks/1 \
 
 Consultez [API_DOCUMENTATION.md](./API_DOCUMENTATION.md) pour :
 
--  Tous les endpoints détaillés
--  Exemples complets avec cURL et Postman
--  Détails de sécurité
--  Troubleshooting
--  Configuration avancée
+- Tous les endpoints détaillés
+- Exemples complets avec cURL et Postman
+- Détails de sécurité
+- Troubleshooting
+- Configuration avancée
 
 ---
 
@@ -378,26 +389,60 @@ POST /api/auth/register (avec un autre username)
 # 3. Vous utilisez le bon ID
 ```
 
----
+## 🛠️ Changements Récents (JWT & Build) – 2026-01-18
 
-## 📊 Métriques & Performance
+### Problème corrigé
 
-- **Authentification** : ~50ms (PBKDF2-SHA256)
-- **Récupération des tâches** : ~1ms
-- **Création de tâche** : ~2ms
-- **Temps de démarrage** : ~2 secondes
+- Erreur d'authentification JWT: `WWW-Authenticate: Bearer error="invalid_token"` et `Method not found: TokenValidationResult..ctor(...)`.
 
----
+### Causes racines
 
-## 📝 Standards & Bonnes Pratiques
+- Conflits de versions entre `Microsoft.AspNetCore.Authentication.JwtBearer` 9.x et des références explicites d'IdentityModel (`Microsoft.IdentityModel.Tokens` / `System.IdentityModel.Tokens.Jwt`) qui ne correspondaient pas aux APIs attendues.
+- Ordre du middleware susceptible d'empêcher la validation correcte lorsque le token est traité.
+- Double `app.Run()` dans `Program.cs` (arrêt prématuré / comportement indéterminé).
 
-### Code
+### Modifications apportées
 
-- ✅ C# nullable reference types
-- ✅ Async/Await patterns
-- ✅ Dependency Injection
-- ✅ Data Annotations for validation
-- ✅ XML Documentation comments
+- `TodosApi.csproj`
+  - Cible restaurée sur **.NET 9** (`net9.0`).
+  - Paquets alignés sur **ASP.NET Core 9.x** (OpenAPI, JwtBearer, EF Core, Sqlite).
+  - Suppression des références explicites à `Microsoft.IdentityModel.Tokens` et `System.IdentityModel.Tokens.Jwt` pour laisser `JwtBearer` importer les versions compatibles transitivement.
+
+- `Program.cs`
+  - Réorganisation du pipeline: `UseForwardedHeaders` → `UseCors` → `UseAuthentication` → `UseAuthorization` → `MapControllers`.
+  - Désactivation de la redirection HTTPS en mode Développement (utilisation HTTP locale) pour éviter des interactions non désirées pendant les tests.
+  - Ajout de handlers d'événements (`OnAuthenticationFailed`, `OnTokenValidated`, `OnChallenge`) pour journaliser les erreurs JWT.
+  - Suppression des appels en double à `app.Run()`.
+
+### Comment tester (JWT)
+
+1. Construire et lancer:
+
+   ```bash
+   dotnet clean
+   dotnet restore
+   dotnet build
+   dotnet run -c Debug
+   ```
+
+2. Dans `API_TEST_GUIDE.http`:
+   - `POST /api/auth/register` (si nouvel utilisateur)
+   - `POST /api/auth/login` et récupérer le **nouveau token**
+   - Remplacer le token dur dans la requête `Authorization: Bearer ...` par le **token fraîchement obtenu**
+   - Appeler un endpoint protégé (`GET /api/tasks`, `POST /api/tasks`)
+
+### Bonnes pratiques
+
+- Toujours utiliser un **token frais** (les tokens expirés/anciens provoquent `invalid_token`).
+- Ne pas pin les paquets IdentityModel manuellement avec ASP.NET Core 9; laisser `JwtBearer` gérer les versions transitives.
+- En Production, activer HTTPS et configurer précisément CORS.
+
+### Dépannage rapide
+
+- Si `invalid_token` persiste:
+  - Vérifier `Issuer`, `Audience`, et la **clé** dans `appsettings(.Development).json`.
+  - Regénérer le token via `/api/auth/login`.
+  - Consulter la console: les logs `OnAuthenticationFailed` / `OnChallenge` indiquent la cause exacte.
 
 ### API
 
@@ -437,9 +482,8 @@ Ce projet est sous licence MIT. Voir le fichier LICENSE pour plus de détails.
 
 Pour toute question ou problème :
 
-1. Consultez la [documentation API complète](./API_DOCUMENTATION.md)
+1. Consultez la [documentation API complète](./Docs/API_DOCUMENTATION.md)
 2. Vérifiez la section [Troubleshooting](#-troubleshooting)
 3. Ouvrez une issue sur GitHub
 
 ---
-

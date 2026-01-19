@@ -1,10 +1,10 @@
 
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using System.ComponentModel.DataAnnotations;
 using System.Security.Claims;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Authorization;
-using TodosApi.Services.Interfaces;
 using TodosApi.Data;
+using TodosApi.Services.Interfaces;
 
 namespace TodosApi.Controllers;
 
@@ -23,6 +23,7 @@ public class TodoController : ControllerBase
     /// <summary>
     /// Gets all tasks for the authenticated user
     /// </summary>
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> GetUserTasks()
     {
@@ -37,6 +38,7 @@ public class TodoController : ControllerBase
     /// <summary>
     /// Gets a specific task for the authenticated user
     /// </summary>
+    [Authorize]
     [HttpGet("{id:int}")]
     public async Task<IActionResult> GetById(int id)
     {
@@ -76,6 +78,7 @@ public class TodoController : ControllerBase
     /// <summary>
     /// Creates a new task for the authenticated user
     /// </summary>
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] TodoCreateDto dto)
     {
@@ -84,7 +87,7 @@ public class TodoController : ControllerBase
 
         var userId = GetUserIdFromToken();
         if (userId == -1)
-            return Unauthorized(new { message = "Invalid token" });
+           return Unauthorized(new { message = "Invalid token" });
 
         var todo = new Todo
         {
@@ -102,6 +105,7 @@ public class TodoController : ControllerBase
     /// <summary>
     /// Updates an existing task for the authenticated user
     /// </summary>
+    [Authorize]
     [HttpPut("{id:int}")]
     public async Task<IActionResult> Update(int id, [FromBody] TodoUpdateDto dto)
     {
@@ -129,6 +133,7 @@ public class TodoController : ControllerBase
     /// <summary>
     /// Marks a task as completed or incomplete
     /// </summary>
+    [Authorize]
     [HttpPatch("{id:int}/complete")]
     public async Task<IActionResult> SetComplete(int id, [FromQuery] bool value = true)
     {
@@ -146,6 +151,7 @@ public class TodoController : ControllerBase
     /// <summary>
     /// Deletes a task for the authenticated user
     /// </summary>
+    [Authorize]
     [HttpDelete("{id:int}")]
     public async Task<IActionResult> Delete(int id)
     {

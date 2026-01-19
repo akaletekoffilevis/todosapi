@@ -9,8 +9,8 @@ POST {{baseUrl}}/api/auth/register
 Content-Type: {{contentType}}
 
 {
-	"username": "admin",
-	"password": "admin123"
+	"username": "testuser",
+	"password": "Test@1234"
 }
 
 ###
@@ -21,8 +21,8 @@ POST {{baseUrl}}/api/auth/login
 Content-Type: {{contentType}}
 
 {
-	"username": "admin",
-	"password": "admin123"
+	"username": "testuser",
+	"password": "Test@1234"
 }
 
 ###

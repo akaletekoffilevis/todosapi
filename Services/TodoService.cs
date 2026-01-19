@@ -58,7 +58,7 @@ public class TodoService : ITodoService
         var exist_todo = await _db.Todos
             .FirstOrDefaultAsync(t => t.Id == id && t.UserId == userId);
         if (exist_todo == null) return false;
-        
+
         _db.Todos.Remove(exist_todo);
         await _db.SaveChangesAsync();
         return true;
@@ -69,7 +69,7 @@ public class TodoService : ITodoService
         var exist_todo = await _db.Todos
             .FirstOrDefaultAsync(t => t.Id == id && t.UserId == userId);
         if (exist_todo == null) return false;
-        
+
         exist_todo.IsCompleted = isCompleted;
         await _db.SaveChangesAsync();
         return true;

@@ -26,23 +26,23 @@ Ouvrez votre navigateur: **<http://localhost:5000/swagger>**
 ### 3️⃣ S'inscrire
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST http://localhost:5252/api/auth/register \
   -H "Content-Type: application/json" \
-  -d '{"username":"demo","password":"Demo@1234"}'
+  -d '{"username":"testuser","password":"Test@1234"}'
 ```
 
 Response:
 
 ```json
-{"id":1,"username":"demo","message":"User registered successfully"}
+{"id":1,"username":"testuser","message":"User registered successfully"}
 ```
 
 ### 4️⃣ Se connecter
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/login \
+curl -X POST http://localhost:5252/api/auth/login \
   -H "Content-Type: application/json" \
-  -d '{"username":"demo","password":"Demo@1234"}'
+  -d '{"username":"testuser","password":"Test@1234"}'
 ```
 
 Response:
@@ -50,7 +50,7 @@ Response:
 ```json
 {
   "token":"eyJhbGciOiJIUzI1NiIs...",
-  "user":{"id":1,"username":"demo"},
+  "user":{"id":1,"username":"testuser"},
   "message":"Login successful"
 }
 ```
@@ -71,7 +71,7 @@ curl -X POST http://localhost:5000/api/tasks \
 ### 6️⃣ Voir les tâches
 
 ```bash
-curl http://localhost:5000/api/tasks \
+curl http://localhost:5252/api/tasks \
   -H "Authorization: Bearer $TOKEN"
 ```
 

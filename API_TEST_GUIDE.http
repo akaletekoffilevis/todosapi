@@ -1,0 +1,69 @@
+@host = http://localhost:5252
+@contentType = application/json
+
+### 1. REGISTER a new user
+POST {{host}}/api/auth/register
+Content-Type: {{contentType}}
+
+{
+  "username": "testuser",
+  "password": "Test@1234"
+}
+
+### 2. LOGIN and get JWT token
+# Copy the token from response and use it below
+POST {{host}}/api/auth/login
+Content-Type: {{contentType}}
+
+{
+  "username": "testuser",
+  "password": "Test@1234"
+}
+
+### 3. GET all tasks (no auth required)
+GET {{host}}/api/tasks
+Accept: {{contentType}}
+Authorization: Bearer {{token here}}
+
+### 4. CREATE a task (REQUIRES VALID JWT TOKEN)
+# IMPORTANT: Replace "YOUR_JWT_TOKEN_HERE" with the actual token from login response
+POST {{host}}/api/tasks
+Content-Type: {{contentType}}
+Authorization: Bearer {{token here}}
+{
+  "title": "My First Task",
+  "description": "This is a test task"
+}
+
+### 5. GET task by ID (no auth required)
+GET {{host}}/api/tasks/1
+Accept: {{contentType}}
+
+### 6. UPDATE a task (REQUIRES VALID JWT TOKEN)
+PUT {{host}}/api/tasks/1
+Content-Type: {{contentType}}
+Authorization: Bearer {{token here}}
+
+{
+  "title": "Updated Task",
+  "description": "Updated description",
+  "isCompleted": false
+}
+
+### 7. MARK task as complete (REQUIRES VALID JWT TOKEN)
+PATCH {{host}}/api/tasks/1/complete?value=true
+Authorization: Bearer {{token here}}
+
+### 8. DELETE a task (REQUIRES VALID JWT TOKEN)
+DELETE {{host}}/api/tasks/1
+Authorization: Bearer YOUR_JWT_TOKEN_HERE
+
+### 9. Test invalid token
+POST {{host}}/api/tasks
+Content-Type: {{contentType}}
+Authorization: Bearer {{token here}}
+
+{
+  "title": "This should fail",
+  "description": "Invalid token"
+}

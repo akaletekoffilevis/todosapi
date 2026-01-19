@@ -32,7 +32,7 @@ Crée un nouveau compte utilisateur.
 ```json
 {
   "id": 1,
-  "username": "john_doe",
+  "username": "testuser",
   "message": "User registered successfully"
 }
 ```
@@ -64,7 +64,7 @@ Authentifie un utilisateur et retourne un token JWT valide pendant 1 heure.
   "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
   "user": {
     "id": 1,
-    "username": "john_doe"
+    "username": "testuser"
   },
   "message": "Login successful"
 }
