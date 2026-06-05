@@ -226,7 +226,7 @@ Supprime une tâche.
 #### 1. S'inscrire
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST http://localhost:5252/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "username": "john_doe",
@@ -237,7 +237,7 @@ curl -X POST http://localhost:5000/api/auth/register \
 #### 2. Se connecter
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/login \
+curl -X POST http://localhost:5252/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "username": "john_doe",
@@ -249,7 +249,7 @@ curl -X POST http://localhost:5000/api/auth/login \
 
 ```bash
 TOKEN="votre_token_jwt"
-curl -X POST http://localhost:5000/api/tasks \
+curl -X POST http://localhost:5252/api/tasks \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{
@@ -261,14 +261,14 @@ curl -X POST http://localhost:5000/api/tasks \
 #### 4. Récupérer les tâches
 
 ```bash
-curl -X GET http://localhost:5000/api/tasks \
+curl -X GET http://localhost:5252/api/tasks \
   -H "Authorization: Bearer $TOKEN"
 ```
 
 #### 5. Modifier une tâche
 
 ```bash
-curl -X PUT http://localhost:5000/api/tasks/1 \
+curl -X PUT http://localhost:5252/api/tasks/1 \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{
@@ -281,14 +281,14 @@ curl -X PUT http://localhost:5000/api/tasks/1 \
 #### 6. Marquer comme complétée
 
 ```bash
-curl -X PATCH "http://localhost:5000/api/tasks/1/complete?value=true" \
+curl -X PATCH "http://localhost:5252/api/tasks/1/complete?value=true" \
   -H "Authorization: Bearer $TOKEN"
 ```
 
 #### 7. Supprimer une tâche
 
 ```bash
-curl -X DELETE http://localhost:5000/api/tasks/1 \
+curl -X DELETE http://localhost:5252/api/tasks/1 \
   -H "Authorization: Bearer $TOKEN"
 ```
 
@@ -298,7 +298,7 @@ curl -X DELETE http://localhost:5000/api/tasks/1 \
 
 1. **Créer une variable d'environnement** :
    - `token` : (laisser vide au départ)
-   - `baseUrl` : `http://localhost:5000`
+   - `baseUrl` : `http://localhost:5252`
 
 2. **Endpoint de Login** :
    - Ajouter un script de test pour extraire et sauvegarder le token :
@@ -403,7 +403,7 @@ curl -X DELETE http://localhost:5000/api/tasks/1 \
    dotnet run
    ```
 
-3. **Accéder à Swagger** : <http://localhost:5000/swagger>
+3. **Accéder à Swagger** : <http://localhost:5252/swagger>
 
 ---
 

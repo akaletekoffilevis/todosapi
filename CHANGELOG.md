@@ -51,7 +51,7 @@ et le projet adhère à [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 
 ## Améliorations Prévues
 
-Voir [Future Amelioration.txt](Future%20Amelioration.txt) pour les fonctionnalités planifiées:
+Voir [FUTURE_IMPROVEMENTS.md](Docs/FUTURE_IMPROVEMENTS.md) pour les fonctionnalités planifiées:
 
 - [ ] Refresh tokens
 - [ ] Pagination des tâches

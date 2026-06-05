@@ -17,7 +17,9 @@ Pour signaler un bug, veuillez:
 
 ## 💡 Proposer une Amélioration
 
-Consultez le fichier [Docs/FUTURE_IMPROVEMENTS.md](Docs/FUTURE_IMPROVEMENTS.md) pour les améliorations planifiées.
+Consultez le fichier [FUTURE_IMPROVEMENTS.md](Docs/FUTURE_IMPROVEMENTS.md) pour les améliorations planifiées.
+
+Consultez [FUTURE_IMPROVEMENTS.md](Docs/FUTURE_IMPROVEMENTS.md) pour la roadmap.
 
 Pour proposer une nouvelle fonctionnalité:
 
@@ -45,11 +47,10 @@ dotnet run --project todosapi.csproj
 ### Structure du Projet
 
 ```
-Controllers/       # Endpoints API
+Controllers/      # Endpoints API
 Data/             # Modèles et DbContext
 Services/         # Logique métier
 Docs/             # Documentation
-Tests/            # Tests unitaires (à implémenter)
 ```
 
 ### Standards de Code

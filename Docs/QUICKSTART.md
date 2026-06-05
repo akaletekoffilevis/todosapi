@@ -13,7 +13,7 @@ Vous verrez:
 
 ```
 info: Microsoft.Hosting.Lifetime[14]
-      Now listening on: http://localhost:5000
+      Now listening on: http://localhost:5252
       Now listening on: https://localhost:5001
 ```
 
@@ -21,7 +21,7 @@ info: Microsoft.Hosting.Lifetime[14]
 
 ### 2️⃣ Accéder à Swagger
 
-Ouvrez votre navigateur: **<http://localhost:5000/swagger>**
+Ouvrez votre navigateur: **<http://localhost:5252/swagger>**
 
 ### 3️⃣ S'inscrire
 
@@ -62,7 +62,7 @@ Sauvegardez le `token` !
 ```bash
 TOKEN="votre_token_ici"
 
-curl -X POST http://localhost:5000/api/tasks \
+curl -X POST http://localhost:5252/api/tasks \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{"title":"Ma première tâche","description":"Test"}'
@@ -158,7 +158,7 @@ dotnet run
 
 ## 🧪 Test Rapide avec Swagger
 
-1. Ouvrez <http://localhost:5000/swagger>
+1. Ouvrez <http://localhost:5252/swagger>
 2. Cliquez sur **POST /api/auth/register**
 3. Cliquez sur **"Try it out"**
 4. Entrez un username et password

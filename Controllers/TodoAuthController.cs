@@ -16,34 +16,20 @@ public class TodoAuthController : ControllerBase
 {
     private readonly TodoDbContext _db;
     private readonly IConfiguration _config;
+    private readonly ILogger<TodoAuthController> _logger;
 
-    public TodoAuthController(TodoDbContext db, IConfiguration config)
+    public TodoAuthController(TodoDbContext db, IConfiguration config, ILogger<TodoAuthController> logger)
     {
         _db = db;
         _config = config;
+        _logger = logger;
     }
 
-    public record RegisterDto(
-        [Required(ErrorMessage = "Username is required")]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = "Username must be between 3 and 100 characters")]
-        string Username,
-        [Required(ErrorMessage = "Password is required")]
-        [StringLength(int.MaxValue, MinimumLength = 8, ErrorMessage = "Password must be at least 8 characters long")]
-        string Password
-    );
-
-    public record LoginDto(
-        [Required(ErrorMessage = "Username is required")]
-        string Username,
-        [Required(ErrorMessage = "Password is required")]
-        string Password
-    );
-
-    /// <summary>
-    /// Registers a new user
-    /// </summary>
+    /// <summary>Creates a new user account</summary>
+    /// <param name="dto">Username (3-100 chars) and password (min 8 chars)</param>
+    /// <returns>201 with user id and username, 409 if username taken, 400 if validation fails</returns>
     [HttpPost("register")]
-    public async Task<IActionResult> Register([FromBody] RegisterDto dto)
+    public async Task<IActionResult> Register([FromBody] RegisterRequest dto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -51,7 +37,7 @@ public class TodoAuthController : ControllerBase
         var username = dto.Username.Trim().ToLowerInvariant();
 
         if (await _db.Users.AnyAsync(u => u.Username == username))
-            return Conflict(new { message = "Username already taken" });
+            return Conflict(new ErrorResponse("Username already taken"));
 
         CreatePasswordHash(dto.Password, out var hash, out var salt);
         var user = new User
@@ -64,19 +50,20 @@ public class TodoAuthController : ControllerBase
         _db.Users.Add(user);
         await _db.SaveChangesAsync();
 
-        return Created($"/api/auth/user/{user.Id}", new
-        {
+        _logger.LogInformation("User registered: {Username}", username);
+
+        return Created($"/api/auth/user/{user.Id}", new RegisterResponse(
             user.Id,
             user.Username,
-            message = "User registered successfully"
-        });
+            "User registered successfully"
+        ));
     }
 
-    /// <summary>
-    /// Authenticates a user and returns a JWT token
-    /// </summary>
+    /// <summary>Authenticates a user and returns a JWT token</summary>
+    /// <param name="dto">Username and password</param>
+    /// <returns>200 with JWT token and user info, 401 if credentials are invalid</returns>
     [HttpPost("login")]
-    public async Task<IActionResult> Login([FromBody] LoginDto dto)
+    public async Task<IActionResult> Login([FromBody] LoginRequest dto)
     {
         if (!ModelState.IsValid)
             return BadRequest(ModelState);
@@ -85,18 +72,20 @@ public class TodoAuthController : ControllerBase
 
         var user = await _db.Users.FirstOrDefaultAsync(u => u.Username == username);
         if (user == null)
-            return Unauthorized(new { message = "Invalid credentials" });
+            return Unauthorized(new ErrorResponse("Invalid credentials"));
 
         if (!VerifyPassword(dto.Password, user.PasswordHash, user.PasswordSalt))
-            return Unauthorized(new { message = "Invalid credentials" });
+            return Unauthorized(new ErrorResponse("Invalid credentials"));
 
         var token = GenerateToken(user);
-        return Ok(new
-        {
+
+        _logger.LogInformation("User logged in: {Username}", username);
+
+        return Ok(new AuthResponse(
             token,
-            user = new { user.Id, user.Username },
-            message = "Login successful"
-        });
+            new UserResponse(user.Id, user.Username),
+            "Login successful"
+        ));
     }
 
     private string GenerateToken(User user)
@@ -144,6 +133,8 @@ public class TodoAuthController : ControllerBase
         var saltBytes = Convert.FromBase64String(salt);
         using var pbkdf2 = new Rfc2898DeriveBytes(password, saltBytes, 100_000, HashAlgorithmName.SHA256);
         var hash = Convert.ToBase64String(pbkdf2.GetBytes(32));
-        return CryptographicOperations.FixedTimeEquals(Convert.FromBase64String(expectedHash), Convert.FromBase64String(hash));
+        return CryptographicOperations.FixedTimeEquals(
+            Convert.FromBase64String(expectedHash),
+            Convert.FromBase64String(hash));
     }
 }

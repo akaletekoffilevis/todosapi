@@ -22,11 +22,6 @@ public class TodoService : ITodoService
             .ToListAsync();
     }
 
-    public async Task<Todo?> GetTodoById(int id)
-    {
-        return await _db.Todos.FindAsync(id);
-    }
-
     public async Task<Todo?> GetUserTodoById(int userId, int todoId)
     {
         return await _db.Todos
@@ -42,35 +37,35 @@ public class TodoService : ITodoService
 
     public async Task<bool> UpdateTodo(int userId, int id, Todo updated)
     {
-        var exist_todo = await _db.Todos
+        var existingTodo = await _db.Todos
             .FirstOrDefaultAsync(t => t.Id == id && t.UserId == userId);
-        if (exist_todo == null) return false;
+        if (existingTodo == null) return false;
 
-        exist_todo.Title = updated.Title;
-        exist_todo.Description = updated.Description;
-        exist_todo.IsCompleted = updated.IsCompleted;
+        existingTodo.Title = updated.Title;
+        existingTodo.Description = updated.Description;
+        existingTodo.IsCompleted = updated.IsCompleted;
         await _db.SaveChangesAsync();
         return true;
     }
 
     public async Task<bool> DeleteTodo(int userId, int id)
     {
-        var exist_todo = await _db.Todos
+        var existingTodo = await _db.Todos
             .FirstOrDefaultAsync(t => t.Id == id && t.UserId == userId);
-        if (exist_todo == null) return false;
+        if (existingTodo == null) return false;
 
-        _db.Todos.Remove(exist_todo);
+        _db.Todos.Remove(existingTodo);
         await _db.SaveChangesAsync();
         return true;
     }
 
     public async Task<bool> ToggleCompletion(int userId, int id, bool isCompleted)
     {
-        var exist_todo = await _db.Todos
+        var existingTodo = await _db.Todos
             .FirstOrDefaultAsync(t => t.Id == id && t.UserId == userId);
-        if (exist_todo == null) return false;
+        if (existingTodo == null) return false;
 
-        exist_todo.IsCompleted = isCompleted;
+        existingTodo.IsCompleted = isCompleted;
         await _db.SaveChangesAsync();
         return true;
     }

@@ -21,7 +21,7 @@ Ce guide fournit tous les tests nécessaires pour valider le bon fonctionnement 
 **Requête**:
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST http://localhost:5252/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "username": "john_doe",
@@ -49,7 +49,7 @@ curl -X POST http://localhost:5000/api/auth/register \
 **Requête**:
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST http://localhost:5252/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "username": "",
@@ -69,7 +69,7 @@ curl -X POST http://localhost:5000/api/auth/register \
 **Requête**:
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST http://localhost:5252/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "username": "john_doe",
@@ -89,7 +89,7 @@ curl -X POST http://localhost:5000/api/auth/register \
 **Requête** (après Test 1):
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST http://localhost:5252/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "username": "john_doe",
@@ -109,7 +109,7 @@ curl -X POST http://localhost:5000/api/auth/register \
 **Requête**:
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/login \
+curl -X POST http://localhost:5252/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "username": "john_doe",
@@ -142,7 +142,7 @@ curl -X POST http://localhost:5000/api/auth/login \
 **Requête**:
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/login \
+curl -X POST http://localhost:5252/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "username": "john_doe",
@@ -162,7 +162,7 @@ curl -X POST http://localhost:5000/api/auth/login \
 **Requête**:
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/login \
+curl -X POST http://localhost:5252/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "username": "nonexistent",
@@ -182,7 +182,7 @@ curl -X POST http://localhost:5000/api/auth/login \
 ### Préalable: Obtenir un token valide
 
 ```bash
-TOKEN=$(curl -s -X POST http://localhost:5000/api/auth/login \
+TOKEN=$(curl -s -X POST http://localhost:5252/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{
     "username": "john_doe",
@@ -201,7 +201,7 @@ echo "Token: $TOKEN"
 **Requête**:
 
 ```bash
-curl -X POST http://localhost:5000/api/tasks \
+curl -X POST http://localhost:5252/api/tasks \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{
@@ -233,7 +233,7 @@ curl -X POST http://localhost:5000/api/tasks \
 **Requête** (sans Authorization header):
 
 ```bash
-curl -X POST http://localhost:5000/api/tasks \
+curl -X POST http://localhost:5252/api/tasks \
   -H "Content-Type: application/json" \
   -d '{
     "title": "Une tâche",
@@ -252,7 +252,7 @@ curl -X POST http://localhost:5000/api/tasks \
 **Requête**:
 
 ```bash
-curl -X POST http://localhost:5000/api/tasks \
+curl -X POST http://localhost:5252/api/tasks \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{
@@ -275,7 +275,7 @@ curl -X POST http://localhost:5000/api/tasks \
 **Requête**:
 
 ```bash
-curl -X GET http://localhost:5000/api/tasks \
+curl -X GET http://localhost:5252/api/tasks \
   -H "Authorization: Bearer $TOKEN"
 ```
 
@@ -306,7 +306,7 @@ curl -X GET http://localhost:5000/api/tasks \
 **Requête**:
 
 ```bash
-curl -X GET http://localhost:5000/api/tasks/1 \
+curl -X GET http://localhost:5252/api/tasks/1 \
   -H "Authorization: Bearer $TOKEN"
 ```
 
@@ -324,7 +324,7 @@ curl -X GET http://localhost:5000/api/tasks/1 \
 **Requête**:
 
 ```bash
-curl -X PUT http://localhost:5000/api/tasks/1 \
+curl -X PUT http://localhost:5252/api/tasks/1 \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{
@@ -345,7 +345,7 @@ curl -X PUT http://localhost:5000/api/tasks/1 \
 **Requête**:
 
 ```bash
-curl -X PUT http://localhost:5000/api/tasks/999 \
+curl -X PUT http://localhost:5252/api/tasks/999 \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{
@@ -369,7 +369,7 @@ curl -X PUT http://localhost:5000/api/tasks/999 \
 **Requête**:
 
 ```bash
-curl -X PATCH "http://localhost:5000/api/tasks/1/complete?value=true" \
+curl -X PATCH "http://localhost:5252/api/tasks/1/complete?value=true" \
   -H "Authorization: Bearer $TOKEN"
 ```
 
@@ -380,7 +380,7 @@ curl -X PATCH "http://localhost:5000/api/tasks/1/complete?value=true" \
 Vérification (GET /api/tasks/1):
 
 ```bash
-curl -X GET http://localhost:5000/api/tasks/1 \
+curl -X GET http://localhost:5252/api/tasks/1 \
   -H "Authorization: Bearer $TOKEN"
 ```
 
@@ -393,7 +393,7 @@ Le champ `isCompleted` doit être `true`.
 **Requête**:
 
 ```bash
-curl -X PATCH "http://localhost:5000/api/tasks/1/complete?value=false" \
+curl -X PATCH "http://localhost:5252/api/tasks/1/complete?value=false" \
   -H "Authorization: Bearer $TOKEN"
 ```
 
@@ -411,7 +411,7 @@ curl -X PATCH "http://localhost:5000/api/tasks/1/complete?value=false" \
 **Requête**:
 
 ```bash
-curl -X DELETE http://localhost:5000/api/tasks/1 \
+curl -X DELETE http://localhost:5252/api/tasks/1 \
   -H "Authorization: Bearer $TOKEN"
 ```
 
@@ -422,7 +422,7 @@ curl -X DELETE http://localhost:5000/api/tasks/1 \
 Vérification (GET /api/tasks/1):
 
 ```bash
-curl -X GET http://localhost:5000/api/tasks/1 \
+curl -X GET http://localhost:5252/api/tasks/1 \
   -H "Authorization: Bearer $TOKEN"
 ```
 
@@ -437,7 +437,7 @@ Résultat attendu:
 **Requête**:
 
 ```bash
-curl -X DELETE http://localhost:5000/api/tasks/999 \
+curl -X DELETE http://localhost:5252/api/tasks/999 \
   -H "Authorization: Bearer $TOKEN"
 ```
 
@@ -456,7 +456,7 @@ curl -X DELETE http://localhost:5000/api/tasks/999 \
 2. Essayez de faire une requête:
 
 ```bash
-curl -X GET http://localhost:5000/api/tasks \
+curl -X GET http://localhost:5252/api/tasks \
   -H "Authorization: Bearer $EXPIRED_TOKEN"
 ```
 
@@ -471,7 +471,7 @@ curl -X GET http://localhost:5000/api/tasks \
 **Requête**:
 
 ```bash
-curl -X GET http://localhost:5000/api/tasks \
+curl -X GET http://localhost:5252/api/tasks \
   -H "Authorization: Bearer invalid_token_here"
 ```
 
@@ -487,12 +487,12 @@ curl -X GET http://localhost:5000/api/tasks \
 
    ```bash
    # Utilisateur 1
-   curl -X POST http://localhost:5000/api/auth/register \
+   curl -X POST http://localhost:5252/api/auth/register \
      -H "Content-Type: application/json" \
      -d '{"username": "user1", "password": "Password1234"}'
    
    # Utilisateur 2
-   curl -X POST http://localhost:5000/api/auth/register \
+   curl -X POST http://localhost:5252/api/auth/register \
      -H "Content-Type: application/json" \
      -d '{"username": "user2", "password": "Password5678"}'
    ```
@@ -502,12 +502,12 @@ curl -X GET http://localhost:5000/api/tasks \
 
 ```bash
 # Token d'Utilisateur 2
-TOKEN_USER2=$(curl -s -X POST http://localhost:5000/api/auth/login \
+TOKEN_USER2=$(curl -s -X POST http://localhost:5252/api/auth/login \
   -H "Content-Type: application/json" \
   -d '{"username": "user2", "password": "Password5678"}' | grep -o '"token":"[^"]*"' | cut -d'"' -f4)
 
 # Tenter d'accéder à la tâche de l'Utilisateur 1 (ID 2)
-curl -X GET http://localhost:5000/api/tasks/2 \
+curl -X GET http://localhost:5252/api/tasks/2 \
   -H "Authorization: Bearer $TOKEN_USER2"
 ```
 
@@ -526,7 +526,7 @@ curl -X GET http://localhost:5000/api/tasks/2 \
 **Utilisateur 1**:
 
 ```bash
-curl -X GET http://localhost:5000/api/tasks \
+curl -X GET http://localhost:5252/api/tasks \
   -H "Authorization: Bearer $TOKEN_USER1"
 ```
 
@@ -535,7 +535,7 @@ Doit retourner 3 tâches.
 **Utilisateur 2**:
 
 ```bash
-curl -X GET http://localhost:5000/api/tasks \
+curl -X GET http://localhost:5252/api/tasks \
   -H "Authorization: Bearer $TOKEN_USER2"
 ```
 
@@ -550,7 +550,7 @@ Doit retourner 2 tâches.
 **Requête**:
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST http://localhost:5252/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "username": "ab",
@@ -570,7 +570,7 @@ curl -X POST http://localhost:5000/api/auth/register \
 **Requête**:
 
 ```bash
-curl -X POST http://localhost:5000/api/auth/register \
+curl -X POST http://localhost:5252/api/auth/register \
   -H "Content-Type: application/json" \
   -d '{
     "username": "'"$(printf 'a%.0s' {1..101})"'",
@@ -589,7 +589,7 @@ curl -X POST http://localhost:5000/api/auth/register \
 **Requête**:
 
 ```bash
-curl -X POST http://localhost:5000/api/tasks \
+curl -X POST http://localhost:5252/api/tasks \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer $TOKEN" \
   -d '{
@@ -612,7 +612,7 @@ curl -X POST http://localhost:5000/api/tasks \
 ```powershell
 # test-api.ps1
 
-$baseUrl = "http://localhost:5000"
+$baseUrl = "http://localhost:5252"
 $testResults = @()
 
 function Test-Endpoint {
@@ -690,7 +690,7 @@ Write-Host "══════════════════════�
 ```bash
 #!/bin/bash
 
-BASE_URL="http://localhost:5000"
+BASE_URL="http://localhost:5252"
 PASSED=0
 FAILED=0
 

@@ -1,7 +1,8 @@
 @host = http://localhost:5252
 @contentType = application/json
 
-### 1. REGISTER a new user
+### 1. Register a new user
+# @name register
 POST {{host}}/api/auth/register
 Content-Type: {{contentType}}
 
@@ -10,8 +11,8 @@ Content-Type: {{contentType}}
   "password": "Test@1234"
 }
 
-### 2. LOGIN and get JWT token
-# Copy the token from response and use it below
+### 2. Login and get JWT token
+# @name login
 POST {{host}}/api/auth/login
 Content-Type: {{contentType}}
 
@@ -20,29 +21,32 @@ Content-Type: {{contentType}}
   "password": "Test@1234"
 }
 
-### 3. GET all tasks (no auth required)
+### 3. Get all tasks
+# Requires a valid token from login
+@token = {{login.response.body.$.token}}
 GET {{host}}/api/tasks
+Authorization: Bearer {{token}}
 Accept: {{contentType}}
-Authorization: Bearer {{token here}}
 
-### 4. CREATE a task (REQUIRES VALID JWT TOKEN)
-# IMPORTANT: Replace "YOUR_JWT_TOKEN_HERE" with the actual token from login response
+### 4. Create a task
 POST {{host}}/api/tasks
 Content-Type: {{contentType}}
-Authorization: Bearer {{token here}}
+Authorization: Bearer {{token}}
+
 {
   "title": "My First Task",
   "description": "This is a test task"
 }
 
-### 5. GET task by ID (no auth required)
+### 5. Get task by ID
 GET {{host}}/api/tasks/1
+Authorization: Bearer {{token}}
 Accept: {{contentType}}
 
-### 6. UPDATE a task (REQUIRES VALID JWT TOKEN)
+### 6. Update a task
 PUT {{host}}/api/tasks/1
 Content-Type: {{contentType}}
-Authorization: Bearer {{token here}}
+Authorization: Bearer {{token}}
 
 {
   "title": "Updated Task",
@@ -50,20 +54,18 @@ Authorization: Bearer {{token here}}
   "isCompleted": false
 }
 
-### 7. MARK task as complete (REQUIRES VALID JWT TOKEN)
+### 7. Mark task as completed
 PATCH {{host}}/api/tasks/1/complete?value=true
-Authorization: Bearer {{token here}}
+Authorization: Bearer {{token}}
 
-### 8. DELETE a task (REQUIRES VALID JWT TOKEN)
+### 8. Mark task as not completed
+PATCH {{host}}/api/tasks/1/complete?value=false
+Authorization: Bearer {{token}}
+
+### 9. Delete a task
 DELETE {{host}}/api/tasks/1
-Authorization: Bearer YOUR_JWT_TOKEN_HERE
+Authorization: Bearer {{token}}
 
-### 9. Test invalid token
-POST {{host}}/api/tasks
-Content-Type: {{contentType}}
-Authorization: Bearer {{token here}}
-
-{
-  "title": "This should fail",
-  "description": "Invalid token"
-}
+### 10. Test invalid token
+GET {{host}}/api/tasks
+Authorization: Bearer invalid_token_here
